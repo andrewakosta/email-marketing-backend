@@ -1,10 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 
-const app = express();
 const { API_VERSION } = require("./config");
+const userRoutes = require("./routes/user");
+const app = express();
 
-app.get(`/api/${API_VERSION}`, (req, res) => {
-  res.send("Testing server");
-});
+app.use(cors());
+app.use(express.json({ extended: true }));
+
+//Routes
+app.use(`/api/${API_VERSION}/user`, userRoutes);
 
 module.exports = app;
