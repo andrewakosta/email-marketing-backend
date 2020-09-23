@@ -1,0 +1,19 @@
+{
+  "name": "email-marketing-backend",
+  "version": "1.0.0",
+  "description": "This backend support the request from a frontend on react which send xmls files to save and then send emails with the emails on the xmls files",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewakosta/email-marketing-backend.git"
+  },
+  "author": "Andres Acosta",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewakosta/email-marketing-backend/issues"
+  },
+  "homepage": "https://github.com/andrewakosta/email-marketing-backend#readme"
+}
