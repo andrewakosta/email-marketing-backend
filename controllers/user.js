@@ -44,7 +44,7 @@ exports.signUp = async (req, res) => {
       payload,
       process.env.SECRET,
       {
-        expiresIn: 7600,
+        expiresIn: process.env.EXPIRES_IN,
       },
       (error, token) => {
         if (error) {
@@ -63,5 +63,48 @@ exports.signUp = async (req, res) => {
 
 /**Login */
 exports.logIn = async (req, res) => {
-  return res.status(200).json({ msg: "Login ...." });
+  //Check if there are some error
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(500).json({ errors: errors.array() });
+  }
+
+  const { email, password } = req.body;
+
+  //find user on data base
+  User.findOne({ email }, (error, userDB) => {
+    if (error) {
+      return res
+        .status(500)
+        .json({ msg: "An error has ocurred while the user was been found" });
+    }
+
+    //Check if the user with that email exist
+    if (!userDB) {
+      return res.status(404).json({ msg: "The email is wrong" });
+    }
+
+    //Compare the sent password with teh stored password
+    if (!bcrypt.compareSync(password, userDB.password)) {
+      return res.status(404).json({ msg: "The password is wrong" });
+    }
+
+    //Create autentication token
+    userDB.password = null;
+
+    jwt.sign(
+      { user: userDB },
+      process.env.SECRET,
+      {
+        expiresIn: process.env.EXPIRES_IN,
+      },
+      (error, token) => {
+        if (error) {
+          throw error;
+        } else {
+          return res.status(200).json({ token });
+        }
+      }
+    );
+  });
 };

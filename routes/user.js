@@ -16,5 +16,12 @@ api.post(
   ],
   userController.signUp
 );
-
+api.post(
+  "/log-in",
+  [
+    check("email", "Please send a E-mial valid").isEmail(),
+    check("password", "Password is wrong").isLength({ min: 6 }),
+  ],
+  userController.logIn
+);
 module.exports = api;
