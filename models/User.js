@@ -26,6 +26,11 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  //Files ref
+  files: {
+    type: Array,
+    default: [],
+  },
 });
 
 module.exports = mongoose.model("User", UserSchema);

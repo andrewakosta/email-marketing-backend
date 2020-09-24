@@ -1,12 +1,11 @@
 const express = require("express");
-//const filesController = require('../controllers/files.js')
-//const {check} = require('express-validator')
+const filesController = require("../controllers/files.js");
+const multipart = require("connect-multiparty");
 const { auth } = require("../middlewares/auth");
+const md_uploadfile = multipart({ uploadDir: "./uploads/xlsx" });
 
 const api = express.Router();
 
-api.post("/upload-files", auth, (req, res) => {
-  return res.status(200).json({ user: req.body.user });
-});
+api.post("/:id", auth, md_uploadfile, filesController.uploadFile);
 
 module.exports = api;
