@@ -100,3 +100,18 @@ exports.deleteFile = (req, res) => {
     }
   });
 };
+exports.getFiles = (req, res) => {
+  const id = req.params.id;
+
+  User.findById(id, (error, userDB) => {
+    if (error) {
+      return res
+        .status(500)
+        .json({ msg: "An error has ocurred while the user was being found" });
+    } else if (!userDB) {
+      return res.status(404).json({ msg: "User no found" });
+    } else {
+      return res.status(200).json({ files: userDB.files });
+    }
+  });
+};

@@ -17,4 +17,7 @@ api.delete(
   auth,
   filesController.deleteFile
 );
+
+api.get("/:id", auth, filesController.getFiles);
+
 module.exports = api;
