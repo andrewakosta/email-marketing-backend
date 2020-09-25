@@ -3,6 +3,8 @@ const User = require("../models/User");
 const fs = require("fs");
 const { removeFile } = require("../helpers/file.js");
 const { removeItemFromArray } = require("../helpers/utils");
+const { update } = require("../models/User");
+const XLSX = require("xlsx");
 
 exports.uploadFile = (req, res) => {
   const _id = req.params.id;
@@ -112,6 +114,47 @@ exports.getFiles = (req, res) => {
       return res.status(404).json({ msg: "User no found" });
     } else {
       return res.status(200).json({ files: userDB.files });
+    }
+  });
+};
+
+exports.getFile = (req, res) => {
+  const _id = req.params.id;
+  const fileName = req.params.file_name;
+
+  User.findById(_id, (error, userDB) => {
+    if (error) {
+      return res.status(500).json({ msg: "Internal server error" });
+    } else if (!userDB) {
+      return res.status(404).json({ msg: "User not found" });
+    } else {
+      try {
+        const excel = XLSX.readFile("./uploads/xlsx/" + fileName);
+
+        let sheetName = excel.SheetNames;
+        let data = XLSX.utils.sheet_to_json(excel.Sheets[sheetName[0]]);
+        return res.status(200).json({ data });
+      } catch (error) {
+        return res
+          .status(500)
+          .json({
+            msg: "An error has ocurred while the file was being readed",
+          });
+      }
+    }
+  });
+};
+//Temporal Endpoint
+exports.cleanFiles = (req, res) => {
+  const id = req.params.id;
+
+  User.findByIdAndUpdate(id, { files: [] }, (error) => {
+    if (error) {
+      res
+        .status(500)
+        .json({ msg: "An erorr has ocurred while the user was being found" });
+    } else {
+      res.status(200).json({ msg: "User updated success" });
     }
   });
 };

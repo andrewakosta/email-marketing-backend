@@ -20,4 +20,9 @@ api.delete(
 
 api.get("/:id", auth, filesController.getFiles);
 
+api.get("/:id/:file_name", auth, filesController.getFile);
+
+///Temporal endpoind
+api.put("/:id", filesController.cleanFiles);
+
 module.exports = api;
