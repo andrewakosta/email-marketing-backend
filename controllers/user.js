@@ -108,3 +108,22 @@ exports.logIn = async (req, res) => {
     );
   });
 };
+
+/**Get user authenticated**/
+exports.getUserAuthenticated = async (req, res) => {
+     //Check if there is a token
+  const token = req.header("x-auth-token");
+
+  if (!token) {
+    //If there is not one token we deny the request
+    return res.status(401).json({ msg: "not token, please log in to get one" });
+  }
+  //Check token
+  try {
+    const cifrate = jwt.verify(token, process.env.SECRET);
+    res.status(200).json({user:cifrate.user})	  
+  } catch (error) {
+    return res.status(401).json({ msg: "Invalid token" });
+  }
+	
+}
