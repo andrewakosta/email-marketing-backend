@@ -3,7 +3,7 @@
 ![status](https://img.shields.io/badge/status-running-green.svg?colorB=00C106) ![readme](https://img.shields.io/badge/readme-OK-green.svg?colorB=00C106) ![database](https://img.shields.io/badge/database-none-green.svg?colorB=00C106) ![commits](https://img.shields.io/badge/commits-8-blue.svg) ![Version](https://img.shields.io/badge/tag-v1.0-orange.svg)
 ![techs](https://img.shields.io/badge/techs-javascript—node-green.svg)
 
-#### This API complements the email-marketing project containing the endpoints to load the Excel files and to send the emails through amazon web services, so before starting it you must replace the following variables in the environment variables
+This API complements the email-marketing project containing the endpoints to load the Excel files and to send the emails through amazon web services, so before starting it you must replace the following variables in the environment variables
 
 <p align="center">
   <img alt="variables image" src="https://s3.amazonaws.com/images.andrewakosta.com/variables-emailp-marketing.jpeg">
