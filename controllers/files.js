@@ -8,7 +8,7 @@ const XLSX = require("xlsx");
 
 exports.uploadFile = (req, res) => {
   const _id = req.params.id;
-
+  
   User.findById(_id, (error, userDB) => {
     if (error) {
       return res
@@ -60,10 +60,10 @@ exports.uploadFile = (req, res) => {
 
 exports.deleteFile = (req, res) => {
   //Check if there are any error if so we return the errors
-  if (!validationResult(req).isEmpty()) {
+  if (!validationResult(req).isEmpty()) {		  
     return res.status(400).json({ errors: validationResult(req).array() });
   }
-
+  
   User.findById({ _id: req.params.id }, (error, userDB) => {
     if (error) {
       return res.status(404).json({ msg: "User not found" });
