@@ -30,4 +30,4 @@ This is the email address from where the emails will be sent and it must be veri
 
 <p style="color:#125a20;background-color:#04ff001f;padding: 8px 15px;">This project is still in development so if you want to collaborate go ahead make a pull request...😀</p>
 
-## CSS color background {data-background}
+
