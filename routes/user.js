@@ -24,4 +24,8 @@ api.post(
   ],
   userController.logIn
 );
+api.get(
+  "/user-authenticated",
+  userController.getUserAuthenticated	
+)
 module.exports = api;
